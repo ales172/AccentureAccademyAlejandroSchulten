@@ -1,0 +1,92 @@
+* {
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box
+}
+
+html,body { height: 100%;}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+body > header {
+    display: flex;
+    padding: 0.5rem 1rem;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    background-color: #713bff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
+
+body > header button {
+    background-color: transparent;
+    border: none;    
+    position: relative;
+    z-index: 9999;
+    color: white;
+}
+
+body > nav {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 300px;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+body > nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 1rem;
+}
+
+body > main {
+    flex-grow: 1;
+    padding: 1rem;
+}
+
+body > footer {
+    background-color: #713bff;
+    text-align: center;
+    color: white;
+    padding: 1rem;
+}
+hr,h1{
+    margin:0px;
+}
+
+.abierto {
+    top: 0;
+    width: 100px;
+}
+
+.card {
+    width: 200px;
+    height: 250px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+    padding: 0 6px;
+    margin: 8px;
+}
+
+.sectionTest {
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 50px;
+    padding-top: 50px;
+}
+#navMenu {
+    background-color: grey;
+}

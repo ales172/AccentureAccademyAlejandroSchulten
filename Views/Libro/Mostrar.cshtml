@@ -1,0 +1,51 @@
+﻿@using AccentureAccademySchultenAlejandro.Models
+@model List<Librito>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Mostrar</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+</head>
+<body>
+    <div class="jumbotron">
+        <h1>Los libros Son:</h1>
+    </div>
+
+    <table class="text-right table-condensed table-striped table-hover">
+        <thead class="text-right">
+            <tr>
+                <th>Titulo</th>
+                <th>Editorial</th>
+              
+                <th>Autor</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (this.Model != null)
+            {
+                foreach (Librito libro in this.Model)
+                {
+                    <tr>
+                        <td>@libro.Titulo</td>
+                        <td>@libro.Editorial.Editorial1</td>
+                       
+                        @foreach (Autor a in libro.Autores)
+                        {                    
+                        <td>@a.Nombre</td>                    
+                    }
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</body>
+</html>

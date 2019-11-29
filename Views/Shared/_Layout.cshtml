@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link rel="stylesheet" type="MIME" href="searchbar.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+</head>
+<body>
+    <nav id="navMenu">
+        <a href="perfil.html" class="link" data-archivo="perfil">perfil</a>
+        <a href="portfolio.html" class="link" data-archivo="portfolio">portfolio</a>
+        <a href="contacto.html" class="link" data-archivo="contacto">contacto</a>
+        <script src="~/Scripts/script.js"></script>
+    </nav>
+    <header>
+        <button id="btnMenu" class="material-icons">menu</button>
+        <h1>Biblioteca</h1>
+        <form action="">
+            <input type="search">
+            <i class="fa fa-search"></i>
+        </form>
+
+    </header>
+    <main>
+        <div class="container body-content ">
+           <hr />
+            @RenderBody()
+            <hr />
+            </div>
+    </main>
+    <footer>
+        <p>&copy; Copyright - 2019</p>
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+
+

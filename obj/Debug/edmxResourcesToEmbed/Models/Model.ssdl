@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProyectoFinalSchultenAlejandroModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Autor">
+    <Key>
+      <PropertyRef Name="Id_Autor" />
+    </Key>
+    <Property Name="Id_Autor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Editorial">
+    <Key>
+      <PropertyRef Name="Id_Editorial" />
+    </Key>
+    <Property Name="Id_Editorial" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Editorial" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="EscritoPor">
+    <Key>
+      <PropertyRef Name="Id_EscritoPor" />
+    </Key>
+    <Property Name="Id_EscritoPor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id_Libro" Type="int" Nullable="false" />
+    <Property Name="Id_Autor" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Genero">
+    <Key>
+      <PropertyRef Name="Id_Genero" />
+    </Key>
+    <Property Name="Id_Genero" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Genero" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Libro">
+    <Key>
+      <PropertyRef Name="Id_Libro" />
+    </Key>
+    <Property Name="Id_Libro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ISBN" Type="varchar" MaxLength="22" />
+    <Property Name="Titulo" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Id_Genero" Type="int" Nullable="false" />
+    <Property Name="Id_Editorial" Type="int" Nullable="false" />
+    <Property Name="Imagen" Type="varchar" MaxLength="100" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="5000" />
+  </EntityType>
+  <Association Name="FK_Author">
+    <End Role="Autor" Type="Self.Autor" Multiplicity="1" />
+    <End Role="EscritoPor" Type="Self.EscritoPor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Autor">
+        <PropertyRef Name="Id_Autor" />
+      </Principal>
+      <Dependent Role="EscritoPor">
+        <PropertyRef Name="Id_Autor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Book">
+    <End Role="Libro" Type="Self.Libro" Multiplicity="1" />
+    <End Role="EscritoPor" Type="Self.EscritoPor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Libro">
+        <PropertyRef Name="Id_Libro" />
+      </Principal>
+      <Dependent Role="EscritoPor">
+        <PropertyRef Name="Id_Libro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Libro_Editorial">
+    <End Role="Editorial" Type="Self.Editorial" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Libro" Type="Self.Libro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Editorial">
+        <PropertyRef Name="Id_Editorial" />
+      </Principal>
+      <Dependent Role="Libro">
+        <PropertyRef Name="Id_Editorial" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Libro_Genero">
+    <End Role="Genero" Type="Self.Genero" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Libro" Type="Self.Libro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Genero">
+        <PropertyRef Name="Id_Genero" />
+      </Principal>
+      <Dependent Role="Libro">
+        <PropertyRef Name="Id_Genero" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ProyectoFinalSchultenAlejandroModelStoreContainer">
+    <EntitySet Name="Autor" EntityType="Self.Autor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Editorial" EntityType="Self.Editorial" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EscritoPor" EntityType="Self.EscritoPor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Genero" EntityType="Self.Genero" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Libro" EntityType="Self.Libro" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Author" Association="Self.FK_Author">
+      <End Role="Autor" EntitySet="Autor" />
+      <End Role="EscritoPor" EntitySet="EscritoPor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Book" Association="Self.FK_Book">
+      <End Role="Libro" EntitySet="Libro" />
+      <End Role="EscritoPor" EntitySet="EscritoPor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Libro_Editorial" Association="Self.FK_Libro_Editorial">
+      <End Role="Editorial" EntitySet="Editorial" />
+      <End Role="Libro" EntitySet="Libro" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Libro_Genero" Association="Self.FK_Libro_Genero">
+      <End Role="Genero" EntitySet="Genero" />
+      <End Role="Libro" EntitySet="Libro" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

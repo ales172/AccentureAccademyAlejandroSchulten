@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ProyectoFinalSchultenAlejandroModelStoreContainer" CdmEntityContainer="ProyectoFinalSchultenAlejandroEntities">
+    <EntitySetMapping Name="Autor">
+      <EntityTypeMapping TypeName="ProyectoFinalSchultenAlejandroModel.Autor">
+        <MappingFragment StoreEntitySet="Autor">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Id_Autor" ColumnName="Id_Autor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Editorial">
+      <EntityTypeMapping TypeName="ProyectoFinalSchultenAlejandroModel.Editorial">
+        <MappingFragment StoreEntitySet="Editorial">
+          <ScalarProperty Name="Editorial1" ColumnName="Editorial" />
+          <ScalarProperty Name="Id_Editorial" ColumnName="Id_Editorial" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EscritoPor">
+      <EntityTypeMapping TypeName="ProyectoFinalSchultenAlejandroModel.EscritoPor">
+        <MappingFragment StoreEntitySet="EscritoPor">
+          <ScalarProperty Name="Id_Autor" ColumnName="Id_Autor" />
+          <ScalarProperty Name="Id_Libro" ColumnName="Id_Libro" />
+          <ScalarProperty Name="Id_EscritoPor" ColumnName="Id_EscritoPor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Genero">
+      <EntityTypeMapping TypeName="ProyectoFinalSchultenAlejandroModel.Genero">
+        <MappingFragment StoreEntitySet="Genero">
+          <ScalarProperty Name="Genero1" ColumnName="Genero" />
+          <ScalarProperty Name="Id_Genero" ColumnName="Id_Genero" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Libro">
+      <EntityTypeMapping TypeName="ProyectoFinalSchultenAlejandroModel.Libro">
+        <MappingFragment StoreEntitySet="Libro">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="Id_Editorial" ColumnName="Id_Editorial" />
+          <ScalarProperty Name="Id_Genero" ColumnName="Id_Genero" />
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+          <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+          <ScalarProperty Name="Id_Libro" ColumnName="Id_Libro" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

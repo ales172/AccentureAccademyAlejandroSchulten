@@ -1,0 +1,26 @@
+﻿@using AccentureAccademySchultenAlejandro.Models
+@model List<Genero>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Mostrar</title>
+</head>
+<body>
+    <div>
+        <h1>Los Generos Son:</h1>
+        <ul>
+            @foreach (Genero genero in this.Model)
+            {
+                <li>@genero.Genero1</li>
+            }
+        </ul>
+
+    </div>
+</body>
+</html>

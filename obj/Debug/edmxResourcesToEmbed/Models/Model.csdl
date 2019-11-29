@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProyectoFinalSchultenAlejandroModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ProyectoFinalSchultenAlejandroEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Autor" EntityType="ProyectoFinalSchultenAlejandroModel.Autor" />
+    <EntitySet Name="Editorial" EntityType="ProyectoFinalSchultenAlejandroModel.Editorial" />
+    <EntitySet Name="EscritoPor" EntityType="ProyectoFinalSchultenAlejandroModel.EscritoPor" />
+    <EntitySet Name="Genero" EntityType="ProyectoFinalSchultenAlejandroModel.Genero" />
+    <EntitySet Name="Libro" EntityType="ProyectoFinalSchultenAlejandroModel.Libro" />
+    <AssociationSet Name="FK_Author" Association="ProyectoFinalSchultenAlejandroModel.FK_Author">
+      <End Role="Autor" EntitySet="Autor" />
+      <End Role="EscritoPor" EntitySet="EscritoPor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Libro_Editorial" Association="ProyectoFinalSchultenAlejandroModel.FK_Libro_Editorial">
+      <End Role="Editorial" EntitySet="Editorial" />
+      <End Role="Libro" EntitySet="Libro" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Book" Association="ProyectoFinalSchultenAlejandroModel.FK_Book">
+      <End Role="Libro" EntitySet="Libro" />
+      <End Role="EscritoPor" EntitySet="EscritoPor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Libro_Genero" Association="ProyectoFinalSchultenAlejandroModel.FK_Libro_Genero">
+      <End Role="Genero" EntitySet="Genero" />
+      <End Role="Libro" EntitySet="Libro" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Autor">
+    <Key>
+      <PropertyRef Name="Id_Autor" />
+    </Key>
+    <Property Name="Id_Autor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="EscritoPor" Relationship="ProyectoFinalSchultenAlejandroModel.FK_Author" FromRole="Autor" ToRole="EscritoPor" />
+  </EntityType>
+  <EntityType Name="Editorial">
+    <Key>
+      <PropertyRef Name="Id_Editorial" />
+    </Key>
+    <Property Name="Id_Editorial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Editorial1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Libro" Relationship="ProyectoFinalSchultenAlejandroModel.FK_Libro_Editorial" FromRole="Editorial" ToRole="Libro" />
+  </EntityType>
+  <EntityType Name="EscritoPor">
+    <Key>
+      <PropertyRef Name="Id_EscritoPor" />
+    </Key>
+    <Property Name="Id_EscritoPor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id_Libro" Type="Int32" Nullable="false" />
+    <Property Name="Id_Autor" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Autor" Relationship="ProyectoFinalSchultenAlejandroModel.FK_Author" FromRole="EscritoPor" ToRole="Autor" />
+    <NavigationProperty Name="Libro" Relationship="ProyectoFinalSchultenAlejandroModel.FK_Book" FromRole="EscritoPor" ToRole="Libro" />
+  </EntityType>
+  <EntityType Name="Genero">
+    <Key>
+      <PropertyRef Name="Id_Genero" />
+    </Key>
+    <Property Name="Id_Genero" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Genero1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Libro" Relationship="ProyectoFinalSchultenAlejandroModel.FK_Libro_Genero" FromRole="Genero" ToRole="Libro" />
+  </EntityType>
+  <EntityType Name="Libro">
+    <Key>
+      <PropertyRef Name="Id_Libro" />
+    </Key>
+    <Property Name="Id_Libro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ISBN" Type="String" MaxLength="22" FixedLength="false" Unicode="false" />
+    <Property Name="Titulo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Id_Genero" Type="Int32" Nullable="false" />
+    <Property Name="Id_Editorial" Type="Int32" Nullable="false" />
+    <Property Name="Imagen" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Editorial" Relationship="ProyectoFinalSchultenAlejandroModel.FK_Libro_Editorial" FromRole="Libro" ToRole="Editorial" />
+    <NavigationProperty Name="EscritoPor" Relationship="ProyectoFinalSchultenAlejandroModel.FK_Book" FromRole="Libro" ToRole="EscritoPor" />
+    <NavigationProperty Name="Genero" Relationship="ProyectoFinalSchultenAlejandroModel.FK_Libro_Genero" FromRole="Libro" ToRole="Genero" />
+  </EntityType>
+  <Association Name="FK_Author">
+    <End Type="ProyectoFinalSchultenAlejandroModel.Autor" Role="Autor" Multiplicity="1" />
+    <End Type="ProyectoFinalSchultenAlejandroModel.EscritoPor" Role="EscritoPor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Autor">
+        <PropertyRef Name="Id_Autor" />
+      </Principal>
+      <Dependent Role="EscritoPor">
+        <PropertyRef Name="Id_Autor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Libro_Editorial">
+    <End Type="ProyectoFinalSchultenAlejandroModel.Editorial" Role="Editorial" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="ProyectoFinalSchultenAlejandroModel.Libro" Role="Libro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Editorial">
+        <PropertyRef Name="Id_Editorial" />
+      </Principal>
+      <Dependent Role="Libro">
+        <PropertyRef Name="Id_Editorial" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Book">
+    <End Type="ProyectoFinalSchultenAlejandroModel.Libro" Role="Libro" Multiplicity="1" />
+    <End Type="ProyectoFinalSchultenAlejandroModel.EscritoPor" Role="EscritoPor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Libro">
+        <PropertyRef Name="Id_Libro" />
+      </Principal>
+      <Dependent Role="EscritoPor">
+        <PropertyRef Name="Id_Libro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Libro_Genero">
+    <End Type="ProyectoFinalSchultenAlejandroModel.Genero" Role="Genero" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="ProyectoFinalSchultenAlejandroModel.Libro" Role="Libro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Genero">
+        <PropertyRef Name="Id_Genero" />
+      </Principal>
+      <Dependent Role="Libro">
+        <PropertyRef Name="Id_Genero" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

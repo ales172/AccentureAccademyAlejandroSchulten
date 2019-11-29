@@ -1,0 +1,26 @@
+﻿@using AccentureAccademySchultenAlejandro.Models
+@model List<Autor>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Mostrar</title>
+</head>
+<body>
+    <div>
+        <h1>Los Autores Son:</h1>
+        <ul>
+            @foreach (Autor autor in this.Model)
+            {
+                <li>@autor.Apellido @autor.Nombre</li>
+            }
+        </ul>
+
+    </div>
+</body>
+</html>
