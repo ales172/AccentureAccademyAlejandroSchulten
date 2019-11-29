@@ -10,9 +10,10 @@ namespace AccentureAccademySchultenAlejandro.Controllers
     public class EditorialController : Controller
     {
         // GET: Editorial
+        ProyectoFinalSchultenAlejandroEntities db = new ProyectoFinalSchultenAlejandroEntities();
+
         public ActionResult Mostrar()
         {
-            ProyectoFinalSchultenAlejandroEntities db = new ProyectoFinalSchultenAlejandroEntities();
             List<Editorial> editoriales = db.Editorial.OrderBy(g => g.Editorial1).ToList();
             return View(editoriales);
         }
@@ -34,8 +35,6 @@ namespace AccentureAccademySchultenAlejandro.Controllers
             {
                 return Content("No puedo insertar los datos, falta agregar la editorial");
             }
-
-            ProyectoFinalSchultenAlejandroEntities db = new ProyectoFinalSchultenAlejandroEntities();
 
             Editorial nuevaEditorial = new Editorial();
             nuevaEditorial.Editorial1 = Editorial1;

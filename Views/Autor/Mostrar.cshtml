@@ -5,22 +5,46 @@
 }
 
 <!DOCTYPE html>
-
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Mostrar</title>
 </head>
 <body>
-    <div>
-        <h1>Los Autores Son:</h1>
-        <ul>
-            @foreach (Autor autor in this.Model)
-            {
-                <li>@autor.Apellido @autor.Nombre</li>
-            }
-        </ul>
+    <header class="jumbotron text-center"><h1>Listado de autores</h1>
+    </header>
+    <main>
+        <div>
+            <th><h2>Los Autores Son:</h2></th>
+            <table>
 
-    </div>
+                @foreach (Autor autor in this.Model)
+                {
+                    <tr>
+                        <td>@autor.Nombre</td>
+                        <td class="text-center">
+                            <div class="text-right">
+                                @Html.ActionLink(" ", $"Editar", new { Id = autor.Id_Autor }, new
+                           {
+                               @class = "glyphicon glyphicon-edit",
+                               style = "font-size: 1.Sem"
+                           })
+
+
+                                @Html.ActionLink(" ", "Eliminar", new { Id = autor.Id_Autor }, new
+                           {
+                               @class = "glyphicon glyphicon-trash",
+                               style = "font-size: 1.Sem"
+                           })
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </main>
 </body>
 </html>

@@ -229,7 +229,7 @@
     <Content Include="Views\Genero\Crear.cshtml" />
     <Content Include="Views\Genero\Mostrar.cshtml" />
     <Content Include="Views\Autor\Mostrar.cshtml" />
-    <Content Include="Views\Autor\Crear.cshtml" />
+    <Content Include="Views\Autor\Editar.cshtml" />
     <Content Include="Views\Libro\Mostrar.cshtml" />
     <Content Include="Views\Libro\Crear.cshtml" />
     <Content Include="Views\Libro\Eliminar.cshtml" />

@@ -10,39 +10,58 @@ namespace AccentureAccademySchultenAlejandro.Controllers
     public class AutorController : Controller
     {
         // GET: Autor
+        ProyectoFinalSchultenAlejandroEntities db = new ProyectoFinalSchultenAlejandroEntities();
+
         public ActionResult Mostrar()
         {
-            ProyectoFinalSchultenAlejandroEntities db = new ProyectoFinalSchultenAlejandroEntities();
             List<Autor> autores = db.Autor.OrderBy(a => a.Nombre).ToList();
             return View(autores);
         }
-
         public ActionResult Crear()
         {
-            return View();
+            this.ViewBag.TituloPagina = "Agregar Autor";
+            Autor autor = new Autor();
+            return View("Editar", autor);
         }
 
         [HttpPost]
-        public ActionResult Crear(string Nombre)
+        public ActionResult Crear(Autor autor)
         {
-            if (Nombre == null)
+            if (autor == null)
             {
                 return Content("No puedo insertar los datos, faltan datos");
             }
 
-            if (Nombre.Length == 0)
+            if (autor.Nombre.Length == 0)
             {
                 return Content("No puedo insertar los datos, faltan datos");
             }
-
-            ProyectoFinalSchultenAlejandroEntities db = new ProyectoFinalSchultenAlejandroEntities();
-
-            Autor nuevoAutor = new Autor();
-            nuevoAutor.Nombre = Nombre;
-            db.Autor.Add(nuevoAutor);
+           
+            db.Autor.Add(autor);
 
             db.SaveChanges();
 
+            return RedirectToAction("Mostrar");
+        }
+        public ActionResult Editar(int Id)
+        {
+            this.ViewBag.TituloPagina = "Editar Autor";
+            Autor aEditar = db.Autor.Find(Id);
+            return View(aEditar);
+        }
+        [HttpPost]
+        public ActionResult Editar(Autor autor)
+        {
+            this.db.Autor.Attach(autor);
+            this.db.Entry(autor).State = System.Data.Entity.EntityState.Modified;
+            this.db.SaveChanges();
+            return RedirectToAction("Mostrar");
+        }
+        public ActionResult Eliminar(int Id)
+        {
+            Autor autor = this.db.Autor.FirstOrDefault(a => a.Id_Autor == Id);
+            this.db.Autor.Remove(autor);
+            this.db.SaveChanges();
             return RedirectToAction("Mostrar");
         }
     }

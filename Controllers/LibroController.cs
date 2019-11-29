@@ -20,9 +20,10 @@ namespace AccentureAccademySchultenAlejandro.Controllers
             List<Librito> libritos = new List<Librito>();
             List<Libro> libros = db.Libro.OrderBy(l => l.Titulo).ToList();
             List<EscritoPor> listadoex = db.EscritoPor.ToList();
-            foreach(Libro l in libros)
+            foreach (Libro l in libros)
             {
                 Librito librito = new Librito();
+                librito.Id_Libro = l.Id_Libro;
                 librito.Titulo = l.Titulo;
                 foreach(EscritoPor ex in listadoex)
                 {
@@ -126,7 +127,9 @@ namespace AccentureAccademySchultenAlejandro.Controllers
                     escritoPor.Id_Autor = idAutor;
                 }else
                     {
-                        autorController.Crear(autor);
+                    Autor autorNew = new Autor();
+                    autorNew.Nombre = autor;
+                        autorController.Crear(autorNew);
                         escritoPor.Id_Autor = db.Autor.Where(aut => aut.Nombre == autor).FirstOrDefault().Id_Autor;
                     }
                 //busco id del libro asi lo asigno a escritoPor
