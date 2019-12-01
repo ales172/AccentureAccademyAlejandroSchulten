@@ -6,9 +6,9 @@
     <edmx:Diagrams>
       <Diagram DiagramId="58d83752c0b1495dacb2350e36b6c3c4" Name="Diagram1">
         <EntityTypeShape EntityType="ProyectoFinalSchultenAlejandroModel.Autor" Width="1.5" PointX="3" PointY="5.625" />
-        <EntityTypeShape EntityType="ProyectoFinalSchultenAlejandroModel.Editorial" Width="1.5" PointX="0.75" PointY="5.625" />
+        <EntityTypeShape EntityType="ProyectoFinalSchultenAlejandroModel.Editorial" Width="1.5" PointX="0.75" PointY="1.625" />
         <EntityTypeShape EntityType="ProyectoFinalSchultenAlejandroModel.EscritoPor" Width="1.5" PointX="5.25" PointY="1.5" />
-        <EntityTypeShape EntityType="ProyectoFinalSchultenAlejandroModel.Genero" Width="1.5" PointX="0.75" PointY="1.625" />
+        <EntityTypeShape EntityType="ProyectoFinalSchultenAlejandroModel.Genero" Width="1.5" PointX="0.75" PointY="5.625" />
         <EntityTypeShape EntityType="ProyectoFinalSchultenAlejandroModel.Libro" Width="1.5" PointX="3" PointY="1" />
         <AssociationConnector Association="ProyectoFinalSchultenAlejandroModel.FK_Author" />
         <AssociationConnector Association="ProyectoFinalSchultenAlejandroModel.FK_Libro_Editorial" />

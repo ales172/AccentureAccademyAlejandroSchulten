@@ -226,17 +226,18 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Genero\Crear.cshtml" />
+    <Content Include="Views\Genero\Editar.cshtml" />
     <Content Include="Views\Genero\Mostrar.cshtml" />
     <Content Include="Views\Autor\Mostrar.cshtml" />
     <Content Include="Views\Autor\Editar.cshtml" />
     <Content Include="Views\Libro\Mostrar.cshtml" />
+    <Content Include="Views\Libro\Editar.cshtml" />
+    <Content Include="Views\Editorial\Editar.cshtml" />
+    <Content Include="Views\Editorial\Mostrar.cshtml" />
     <Content Include="Views\Libro\Crear.cshtml" />
-    <Content Include="Views\Libro\Eliminar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Editorial\" />
     <Folder Include="Views\EscritoPor\" />
   </ItemGroup>
   <ItemGroup>

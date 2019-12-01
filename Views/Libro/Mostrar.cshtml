@@ -25,27 +25,46 @@
             <tr>
                 <th>Titulo</th>
                 <th>Editorial</th>
-              
+                <th>Descripcion</th>
                 <th>Autor</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="text-left">
             @if (this.Model != null)
-            {
-                foreach (Librito libro in this.Model)
-                {
-                    <tr>
-                        <td>@libro.Titulo</td>
-                        <td>@libro.Editorial.Editorial1</td>
-                       
-                        @foreach (Autor a in libro.Autores)
-                        {                    
-                        <td>@a.Nombre</td>                    
+             {
+                    foreach (Librito libro in this.Model)
+                    {
+                <tr>
+                    <td>@libro.Titulo</td>
+                    <td>@libro.Editorial</td>
+                    <td>@libro.Descripcion</td>
+
+                    @foreach (Autor a in libro.Autores)
+                    {
+                        <td>@a.Nombre</td>
+
                     }
-                    </tr>
-                }
-            }
-        </tbody>
-    </table>
+
+                    <td class="text-center">
+                        <div class="text-left">
+                            @Html.ActionLink(" ", $"Editar", new { Id = libro.Id_Libro }, new
+                       {
+                           @class = "glyphicon glyphicon-edit",
+                           style = "font-size: 1.Sem"
+                       })
+
+
+                            @Html.ActionLink(" ", "Eliminar", new { Id = libro.Id_Libro }, new
+                       {
+                           @class = "glyphicon glyphicon-trash",
+                           style = "font-size: 1.Sem"
+                       })
+                        </div>
+                    </td>
+                </tr>
+             }
+        }
+            </tbody>
+        </table>
 </body>
 </html>

@@ -229,7 +229,8 @@
     }
 }
 ]
-
+let c = document.querySelector(".container body-content")
+let b = document.querySelector("body")
 let s = document.createElement("section")
 usuarios.forEach(usuario => {
     let div = document.createElement("div")
@@ -247,5 +248,10 @@ usuarios.forEach(usuario => {
     console.log(div)
     s.className = "sectionTest"
     s.appendChild(div)
-    m.appendChild(s);
+    b.appendChild(s)
+    c.appendChild(b);
+    
 });
+
+let btnMenu = document.querySelector("#btnMenu");
+btnMenu.addEventListener("click", () => nav.classList.toggle("abierto"))

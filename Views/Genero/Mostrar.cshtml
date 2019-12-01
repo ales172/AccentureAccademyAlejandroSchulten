@@ -10,17 +10,38 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Mostrar</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
 </head>
 <body>
     <div>
-        <h1>Los Generos Son:</h1>
-        <ul>
+        <th><h2>Generos:</h2></th>
+        <table>
+
             @foreach (Genero genero in this.Model)
             {
-                <li>@genero.Genero1</li>
-            }
-        </ul>
+                <tr>
+                    <td><h3>@genero.Genero1</h3></td>
+                    <td class="text-center">
+                        <div class="text-right">
+                            @Html.ActionLink(" ", $"Editar", new { Id = genero.Id_Genero }, new
+                       {
+                           @class = "glyphicon glyphicon-edit",
+                           style = "font-size: 1.Sem"
+                       })
 
+
+                            @Html.ActionLink(" ", "Eliminar", new { Id = genero.Id_Genero }, new
+                       {
+                           @class = "glyphicon glyphicon-trash",
+                           style = "font-size: 1.Sem"
+                       })
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
     </div>
 </body>
 </html>

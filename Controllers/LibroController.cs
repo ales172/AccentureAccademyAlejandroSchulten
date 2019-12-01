@@ -25,6 +25,11 @@ namespace AccentureAccademySchultenAlejandro.Controllers
                 Librito librito = new Librito();
                 librito.Id_Libro = l.Id_Libro;
                 librito.Titulo = l.Titulo;
+                librito.Descripcion = l.Descripcion;
+                librito.Editorial = db.Editorial.Where(e => e.Id_Editorial == l.Id_Editorial).FirstOrDefault().Editorial1;
+                librito.Genero = db.Genero.Where(g => g.Id_Genero == l.Id_Genero).FirstOrDefault().Genero1;
+                librito.Imagen = l.Imagen;
+                librito.ISBN = l.ISBN;
                 foreach(EscritoPor ex in listadoex)
                 {
                     if(l.Id_Libro == ex.Id_Libro)
@@ -32,7 +37,6 @@ namespace AccentureAccademySchultenAlejandro.Controllers
                         librito.Autores.Add(db.Autor.Find(ex.Id_Autor));
                     }
                 }
-                librito.Editorial = db.Editorial.Find(l.Id_Editorial);
                 libritos.Add(librito);
             }
 
@@ -41,14 +45,15 @@ namespace AccentureAccademySchultenAlejandro.Controllers
 
         public ActionResult Crear()
         {
+            this.ViewBag.TituloPagina = "Agregar Libro";
             List<Autor> Autores = new List<Autor>();
-            return View(Autores);
+            return View("Crear", Autores);
         }
 
         [HttpPost]
         public ActionResult Crear(string ISBN, string Titulo, IEnumerable<string> Autores, string Genero,string Editorial, string Imagen, string Descripcion)
         {
-            if (ISBN == null || Titulo == null || Genero == null || Editorial == null)
+            if (ISBN == null || Titulo == null || Genero == null || Editorial == null|| Autores == null)
             {
                 return Content("No puedo insertar el libro, faltan datos");
             }
@@ -78,9 +83,11 @@ namespace AccentureAccademySchultenAlejandro.Controllers
             }
             else
             {
-                generoController.Crear(Genero);
-                Genero nuevo = db.Genero.Where(g => g.Genero1 == Genero).FirstOrDefault();
-                nuevoLibro.Id_Genero = nuevo.Id_Genero;
+
+                Genero nuevoGen = new Genero();
+                nuevoGen.Genero1 = Genero;
+                generoController.Crear(nuevoGen);
+                nuevoLibro.Id_Genero = db.Genero.Where(g => g.Genero1 == Genero).FirstOrDefault().Id_Genero;
             }
             //busco la editorial, si esta la asigno, sino la agrego y asigno
             List<Editorial> editoriales = db.Editorial.ToList();
@@ -97,9 +104,10 @@ namespace AccentureAccademySchultenAlejandro.Controllers
             }
             else
             {
-                editorialController.Crear(Editorial);
-                Editorial nueva = db.Editorial.Where(e => e.Editorial1 == Editorial).FirstOrDefault();
-                nuevoLibro.Id_Editorial = nueva.Id_Editorial;
+                Editorial newEditorial = new Editorial();
+                newEditorial.Editorial1 = Editorial;
+                editorialController.Crear(newEditorial);
+                nuevoLibro.Id_Editorial = db.Editorial.Where(e => e.Editorial1 == Editorial).FirstOrDefault().Id_Editorial;
             }
             nuevoLibro.Descripcion = Descripcion;
             nuevoLibro.ISBN = ISBN;
@@ -108,14 +116,16 @@ namespace AccentureAccademySchultenAlejandro.Controllers
           
             db.Libro.Add(nuevoLibro);
             db.SaveChanges();
+
             // me fijo si el autor existe o no y lo asigno a escritoPor
             List<Autor> autoresAux = db.Autor.ToList();
             List<int> idAutores = new List<int>();
-            foreach (string autor in Autores)//Autores es la lista que entra por parametro al metodo
+            //Autores es la lista que entra por parametro al metodo
+            foreach (string autor in Autores)
             {
                 int idAutor = -1;
-
-                foreach (Autor autorAux in autoresAux)//autoresAux es la lista de los autores de la base
+                //autoresAux es la lista de los autores de la base
+                foreach (Autor autorAux in autoresAux)
                 {
                 if (autor == autorAux.Nombre)
                 {
@@ -140,7 +150,7 @@ namespace AccentureAccademySchultenAlejandro.Controllers
 
             return RedirectToAction("Mostrar");
         }
-        [HttpPost]
+      
         public ActionResult Eliminar(int Id)
         {
             List<EscritoPor> listadoex = db.EscritoPor.ToList();
@@ -150,8 +160,137 @@ namespace AccentureAccademySchultenAlejandro.Controllers
                 if (e.Id_Libro == Id)
                 {
                     db.EscritoPor.Remove(e);
-                    db.Libro.Remove(aEliminar);
                 }
+            }
+            db.Libro.Remove(aEliminar);
+            db.SaveChanges();
+
+            return RedirectToAction("Mostrar");
+        }
+        public ActionResult Editar(int Id)
+        {
+            this.ViewBag.TituloPagina = "Agregar Libro";
+            Librito libro = new Librito();
+            Libro aux = db.Libro.Find(Id);
+            libro.Descripcion = aux.Descripcion;
+            libro.Editorial = db.Editorial.Find(aux.Id_Editorial).Editorial1;
+            libro.Genero = db.Genero.Find(aux.Id_Genero).Genero1;
+            libro.Id_Libro = Id;
+            libro.Imagen = aux.Imagen;
+            libro.ISBN = aux.ISBN;
+            libro.Titulo = aux.Titulo;
+            List<EscritoPor> escritopor = db.EscritoPor.ToList();
+            foreach(EscritoPor esx in escritopor)
+            {
+                if(esx.Id_Libro == Id)
+                {
+                    libro.Autores.Add(db.Autor.Find(esx.Id_Autor));
+                }
+            }
+            return View(libro);
+        }
+
+        [HttpPost]
+        public ActionResult Editar(Librito libro)
+        {
+            int idEditorial = -1;
+            int idGenero = -1;
+            EscritoPor escritoPor = new EscritoPor();
+            Libro nuevoLibro = new Libro();
+
+            //busco el genero, si no esta lo creo y lo asigno, sino lo asigno directamente
+            List<Genero> generos = db.Genero.ToList();
+            foreach (Genero g in generos)
+            {
+                if (g.Genero1 == libro.Genero)
+                {
+                    idGenero = g.Id_Genero;
+                }
+            }
+            if (idGenero != -1)
+            {
+                nuevoLibro.Id_Genero = idGenero;
+            }
+            else
+            {
+
+                Genero nuevoGen = new Genero();
+                nuevoGen.Genero1 = libro.Genero;
+                generoController.Crear(nuevoGen);
+                nuevoLibro.Id_Genero = db.Genero.Where(g => g.Genero1 == libro.Genero).FirstOrDefault().Id_Genero;
+            }
+            //busco la editorial, si esta la asigno, sino la agrego y asigno
+            List<Editorial> editoriales = db.Editorial.ToList();
+            foreach (Editorial e in editoriales)
+            {
+                if (e.Editorial1 == libro.Editorial)
+                {
+                    idEditorial = e.Id_Editorial;
+                }
+            }
+            if (idEditorial != -1)
+            {
+                nuevoLibro.Id_Editorial = idEditorial;
+            }
+            else
+            {
+                Editorial newEditorial = new Editorial();
+                newEditorial.Editorial1 = libro.Editorial;
+                editorialController.Crear(newEditorial);
+                nuevoLibro.Id_Editorial = db.Editorial.Where(e => e.Editorial1 == libro.Editorial).FirstOrDefault().Id_Editorial;
+            }
+            nuevoLibro.Descripcion = libro.Descripcion;
+            nuevoLibro.ISBN = libro.ISBN;
+            nuevoLibro.Titulo = libro.Titulo;
+            nuevoLibro.Imagen = libro.Imagen;
+            nuevoLibro.Id_Libro = libro.Id_Libro;
+
+            this.db.Libro.Attach(nuevoLibro);
+            this.db.Entry(nuevoLibro).State = System.Data.Entity.EntityState.Modified;
+            this.db.SaveChanges();
+            
+            //borro los escritopor del id del libro
+            List<EscritoPor> listaEsx = db.EscritoPor.ToList();
+            foreach(EscritoPor ex in listaEsx)
+            {
+                if(ex.Id_Libro == libro.Id_Libro)
+                {
+                    EscritoPor aux = this.db.EscritoPor.FirstOrDefault(a => a.Id_EscritoPor == ex.Id_EscritoPor );
+                    this.db.EscritoPor.Remove(aux);
+                    this.db.SaveChanges();
+                }
+            }
+
+            // me fijo si el autor existe o no y lo asigno a escritoPor
+            List<Autor> autoresAux = db.Autor.ToList();
+            
+            //Autores es la lista que entra por parametro al metodo
+            foreach (Autor autor in libro.Autores)
+            {
+                int idAutor = -1;
+                //autoresAux es la lista de los autores de la base
+                foreach (Autor autorAux in autoresAux)
+                {
+                    if (autor.Nombre == autorAux.Nombre)
+                    {
+                        idAutor = autorAux.Id_Autor;
+                    }
+                }
+                if (idAutor != -1)
+                {
+                    escritoPor.Id_Autor = idAutor;
+                }
+                else
+                {
+                    Autor autorNew = new Autor();
+                    autorNew.Nombre = autor.Nombre;
+                    autorController.Crear(autorNew);
+                    escritoPor.Id_Autor = db.Autor.Where(aut => aut.Nombre == autor.Nombre).FirstOrDefault().Id_Autor;
+                }
+                //busco id del libro asi lo asigno a escritoPor
+                escritoPor.Id_Libro = db.Libro.Where(l => l.Titulo == libro.Titulo).FirstOrDefault().Id_Libro;
+                db.EscritoPor.Add(escritoPor);
+                db.SaveChanges();
             }
 
             return RedirectToAction("Mostrar");

@@ -1,0 +1,30 @@
+﻿@using AccentureAccademySchultenAlejandro.Models
+@model Editorial
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Crear</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+</head>
+<body>
+    <header class="jumbotron text-center">
+        <h1>@this.ViewBag.TituloPagina</h1>
+    </header>
+    <form method="post">
+       Editorial:
+        <input type="text" name="Editorial1" value="@this.Model.Editorial1" />
+        <input type="hidden" name="Id_Editorial" value="@this.Model.Id_Editorial" />
+
+        <button>Enviar Datos</button>
+    </form>
+</body>
+</html>

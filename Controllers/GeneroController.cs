@@ -10,41 +10,59 @@ namespace AccentureAccademySchultenAlejandro.Controllers
     public class GeneroController : Controller
     {
         // GET: Genero
+        ProyectoFinalSchultenAlejandroEntities db = new ProyectoFinalSchultenAlejandroEntities();
 
         public ActionResult Mostrar()
         {
-            ProyectoFinalSchultenAlejandroEntities db = new ProyectoFinalSchultenAlejandroEntities();
             List<Genero> generos = db.Genero.OrderBy(g => g.Genero1).ToList();
             return View(generos);
         }
 
         public ActionResult Crear()
         {
-            return View();
+            this.ViewBag.TituloPagina = "Agregar Genero";
+            Genero genero = new Genero();
+            return View("Editar",genero);
         }
 
         [HttpPost]
-        public ActionResult Crear(string Genero1)
+        public ActionResult Crear(Genero genero)
         {
-            if (Genero1 == null)
+            if (genero == null)
             {
                 return Content("No puedo insertar los datos falta el genero");
             }
 
-            if (Genero1.Length == 0)
+            if (genero.Genero1.Length == 0)
             {
                 return Content("No puedo insertar los datos falta el genero");
             }
-
-            ProyectoFinalSchultenAlejandroEntities db = new ProyectoFinalSchultenAlejandroEntities();
-
-            Genero nuevoGenero = new Genero();
-            nuevoGenero.Genero1 = Genero1;
-
-            db.Genero.Add(nuevoGenero);
+            
+            db.Genero.Add(genero);
 
             db.SaveChanges();
 
+            return RedirectToAction("Mostrar");
+        }
+        public ActionResult Editar(int Id)
+        {
+            this.ViewBag.TituloPagina = "Editar Genero";
+            Genero aEditar = db.Genero.Find(Id);
+            return View(aEditar);
+        }
+        [HttpPost]
+        public ActionResult Editar(Genero genero)
+        {
+            this.db.Genero.Attach(genero);
+            this.db.Entry(genero).State = System.Data.Entity.EntityState.Modified;
+            this.db.SaveChanges();
+            return RedirectToAction("Mostrar");
+        }
+        public ActionResult Eliminar(int Id)
+        {
+            Genero genero = this.db.Genero.FirstOrDefault(g => g.Id_Genero == Id);
+            this.db.Genero.Remove(genero);
+            this.db.SaveChanges();
             return RedirectToAction("Mostrar");
         }
 

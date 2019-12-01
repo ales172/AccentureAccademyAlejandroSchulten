@@ -57,4 +57,12 @@ SELECT * FROM Autor
 SELECT * FROM Libro
 SELECT * FROM Editorial
 
-SELEC
+SELECT 
+l.Titulo, a.Nombre AS Autor, ed.Editorial   
+FROM 
+Libro l INNER JOIN EscritoPor es 
+ON l.Id_Libro = es.Id_Libro 
+INNER JOIN Autor a 
+ON es.Id_Autor = a.Id_Autor 
+INNER JOIN Editorial ed 
+ON l.Id_Editorial = ed.Id_Editorial

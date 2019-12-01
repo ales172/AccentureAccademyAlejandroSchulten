@@ -14,35 +14,55 @@ namespace AccentureAccademySchultenAlejandro.Controllers
 
         public ActionResult Mostrar()
         {
+
             List<Editorial> editoriales = db.Editorial.OrderBy(g => g.Editorial1).ToList();
             return View(editoriales);
         }
 
         public ActionResult Crear()
         {
-            return View();
+            Editorial editorial = new Editorial();
+            this.ViewBag.TituloPagina = "Agregar Editorial";
+            return View("Editar", editorial);
         }
 
         [HttpPost]
-        public ActionResult Crear(string Editorial1)
+        public ActionResult Crear(Editorial editorial)
         {
-            if (Editorial1 == null)
+            if (editorial == null)
             {
                 return Content("No puedo insertar los datos, falta agregar la editorial");
             }
-
-            if (Editorial1.Length == 0)
+            if (editorial.Editorial1.Length == 0)
             {
                 return Content("No puedo insertar los datos, falta agregar la editorial");
             }
-
-            Editorial nuevaEditorial = new Editorial();
-            nuevaEditorial.Editorial1 = Editorial1;
-
-            db.Editorial.Add(nuevaEditorial);
+            db.Editorial.Add(editorial);
 
             db.SaveChanges();
 
+            return RedirectToAction("Mostrar");
+        }
+
+        public ActionResult Editar(int Id)
+        {
+            this.ViewBag.TituloPagina = "Editar Editorial";
+            Editorial aEditar = db.Editorial.Find(Id);
+            return View(aEditar);
+        }
+        [HttpPost]
+        public ActionResult Editar(Editorial editorial)
+        {
+            this.db.Editorial.Attach(editorial);
+            this.db.Entry(editorial).State = System.Data.Entity.EntityState.Modified;
+            this.db.SaveChanges();
+            return RedirectToAction("Mostrar");
+        }
+        public ActionResult Eliminar(int Id)
+        {
+            Editorial editorial = this.db.Editorial.FirstOrDefault(e => e.Id_Editorial == Id);
+            this.db.Editorial.Remove(editorial);
+            this.db.SaveChanges();
             return RedirectToAction("Mostrar");
         }
     }

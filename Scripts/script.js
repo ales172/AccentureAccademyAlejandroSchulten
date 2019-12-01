@@ -20,8 +20,35 @@ btnOtroAutor.addEventListener("click", e => {
     e.preventDefault();
     agregaAutor();
 });
-let m = document.querySelector("main");
-let s = document.createElement("section")
+
+
+let main = document.querySelector("main");
+
+let btnMenu = document.querySelector("#btnMenu");
+let nav = document.querySelector("#navMenu");
+btnMenu.addEventListener("click", () => nav.classList.toggle("abierto"))
+
+function direccion(url) {
+    let xhr = new XMLHttpRequest;
+    xhr.open("GET", url);
+    xhr.addEventListener("readystatechange", () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            main.innerHTML = xhr.response;
+            nav.classList.toggle("abierto")
+
+        }
+    })
+    xhr.send();
+}
+
+let links = document.querySelectorAll(".link");
+links.forEach(link => {
+    link.addEventListener("click", e => {
+        e.preventDefault();
+        direccion(`${e.target.dataset.archivo}.html`)
+    })
+})*/
+/*
 usuarios.forEach(usuario => {
     let div = document.createElement("div")
     let h2 = document.createElement("h2")
@@ -39,31 +66,6 @@ usuarios.forEach(usuario => {
     s.className = "sectionTest"
     s.appendChild(div)
     m.appendChild(s);
-});
+});*/
 //document.body.appendChild(s);
 //m.appendChild(s);
-
-let main = document.querySelector("main");
-let btnMenu = document.querySelector("#btnMenu");
-let links = document.querySelectorAll(".link");
-let nav = document.querySelector("nav");
-btnMenu.addEventListener("click", () => nav.classList.toggle("abierto"))
-function direccion(url) {
-    let xhr = new XMLHttpRequest;
-    xhr.open("GET", url);
-    xhr.addEventListener("readystatechange", () => {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            main.innerHTML = xhr.response;
-            nav.classList.toggle("abierto")
-
-        }
-    })
-    xhr.send();
-}
-/*
-links.forEach(link => {
-    link.addEventListener("click", e => {
-        e.preventDefault();
-        direccion(`${e.target.dataset.archivo}.html`)
-    })
-})*/

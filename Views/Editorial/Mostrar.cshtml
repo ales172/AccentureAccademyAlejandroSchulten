@@ -1,41 +1,41 @@
 ﻿@using AccentureAccademySchultenAlejandro.Models
-@model List<Autor>
+@model List<Editorial>
 @{
     Layout = null;
 }
 
 <!DOCTYPE html>
-
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Mostrar</title>
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <script src="~/Scripts/bootstrap.js"></script>
-    <script src="~/Scripts/jquery-3.3.1.js"></script>
 </head>
 <body>
-    <header class="jumbotron text-center"><h1>Listado de autores</h1>
+    <header class="jumbotron text-center">
+        <h1>Listado de Editoriales</h1>
     </header>
     <main>
         <div>
-            <th><h2>Autores:</h2></th>
+            <th><h2>Editoriales:</h2></th>
             <table>
 
-                @foreach (Autor autor in this.Model)
+                @foreach (Editorial editorial in this.Model)
                 {
                     <tr>
-                        <td><h3>@autor.Nombre</h3></td>
+                        <td><h3>@editorial.Editorial1</h3></td>
                         <td class="text-center">
                             <div class="text-right">
-                                @Html.ActionLink(" ", $"Editar", new { Id = autor.Id_Autor }, new
+                                @Html.ActionLink(" ", $"Editar", new { Id = editorial.Id_Editorial}, new
                            {
                                @class = "glyphicon glyphicon-edit",
                                style = "font-size: 1.Sem"
                            })
 
 
-                                @Html.ActionLink(" ", "Eliminar", new { Id = autor.Id_Autor }, new
+                                @Html.ActionLink(" ", "Eliminar", new { Id = editorial.Id_Editorial }, new
                            {
                                @class = "glyphicon glyphicon-trash",
                                style = "font-size: 1.Sem"
