@@ -87,7 +87,7 @@ footer {
     justify-content: stretch;
     align-items: center;
     height: 100%;
-    position: fixed;
+    position: absolute;
     float: right;
     right: 0;
     top: 85px;
@@ -114,4 +114,10 @@ footer {
     color: #713bff;
     background-color: transparent;
     border: none;
+}
+
+.img-responsive{
+    height:100%;
+    min-height:207px;
+    width: 100%;
 }

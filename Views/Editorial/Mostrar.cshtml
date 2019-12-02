@@ -7,16 +7,18 @@
 <body>
     <main>
         <div>
-            <th><h2>Editoriales:</h2></th>
+
+            <h2>Editoriales:</h2>
+            <span style="z-index:0">@Html.ActionLink("Nuevo", "Crear", "Editorial", null, new { @class = "glyphicon glyphicon-plus" })</span>
             <table>
 
                 @foreach (Editorial editorial in this.Model)
                 {
                     <tr>
-                        <td>@editorial.Editorial1</td>
+                        <td><h3>@editorial.Editorial1</h3></td>
                         <td class="text-center">
                             <div class="text-right">
-                                @Html.ActionLink(" ", $"Editar", new { Id = editorial.Id_Editorial}, new
+                                @Html.ActionLink(" ", $"Editar", new { Id = editorial.Id_Editorial }, new
                            {
                                @class = "glyphicon glyphicon-edit",
                                style = "font-size: 1.Sem"

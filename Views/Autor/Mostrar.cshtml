@@ -5,9 +5,12 @@
 <!DOCTYPE html>
 
 <html>
+<body>
     <main>
         <div>
-            <th><h2>Autores:</h2></th>
+
+            <h2>Autores:</h2>
+            <span style="z-index:0">@Html.ActionLink("Nuevo", "Crear", "Autor", null, new { @class = "glyphicon glyphicon-plus" })</span>
             <table>
 
                 @foreach (Autor autor in this.Model)

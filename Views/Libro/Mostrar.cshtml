@@ -3,113 +3,81 @@
 
 
 <!DOCTYPE html>
+<script>
+function myFunction() {
+  var input, filter, conteiner, card, td, i;
+        input = document.getElementById("buscar");
+        filter = input.value.toUpperCase();
+    conteiner = document.getElementById("info");
+    card = table.getElementById("titulo");
+    for (i = 0; i < conteiner.length; i++) {
+            td = card[i].getElementsByTagName("autores")[3];
+   if (td) {
+     if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            card[i].style.display = "";
+      } else {
+            card[i].style.display = "none";
+      }
+     }
+   }
+ }
 
+</script>
 <html>
 <body>
     <main class="wraper">
         <nav id="navLibros">
-            @Html.ActionLink("Agregar", "Crear", "Libro", null, new { @class = "btnCrear" })
-            <table>
-                <thead>
-                    Ordenar por:
-                </thead>
-                <tbody>
-                    <!--<tr>
-                    <input type="text" id="search" placeholder="Busque..." autofocus />
-                </tr>-->
-                    <tr>
-                        <form id="Ordenar">
-                            <select>
-                                <option value="Titulo" selected>Titulo</option>
-                                <option value="Autor">Autor</option>
-                                <option value="Editorial">Editorial</option>
-                                <option value="Genero">Genero</option>
-                            </select>
-                            <input type="submit" value="Aceptar">
-                        </form>
-                    </tr>
-                </tbody>
-            </table>
+            @Html.ActionLink("Nuevo", "Crear", "Libro", null, new { @class = "btnCrear btn" })
+
+            <!--<input type="text" id="buscar" onkeyup="myFunction()" placeholder="Busqueda Central" title="Busqueda Rapida" class="form-control">-->
+
+            <!--<tr>
+        <input type="text" id="search" placeholder="Busque..." autofocus />
+    </tr>-->
+            <form>
+                <div>Ordenar por:</div>
+                <select action="/Libro/MostrarOrdenado/" class="glyphicon glyphicon-refresh">
+                    <option value="Autor">Autor</option>
+                    <option value="Genero">Genero</option>
+                    <option value="Titulo" selected>Titulo</option>
+                    <option value="Editorial">Editorial</option>
+                </select>
+
+                <button class="glyphicon glyphicon-refresh" style="margin-top:1em" onclick="location.href='@Url.Action("MostrarOrdenado", "Libro",new {ordenadopor = "Autor" })'">
+                </button>
+            </form>
+
+
         </nav>
-        <!--
-    <table id="TablaMuestra" class="text-right table-condensed table-striped table-hover">
-        <thead class="text-right">
-            <tr>
-                <th>ISBN</th>
-                <th>Titulo</th>
-                <th>Editorial</th>
-                <th>Descripcion</th>
-                <th>Autor</th>
-            </tr>
-        </thead>
-        <tbody class="text-left">
-            /*if (this.Model != null)
-            {
+   
+    <div class="contenedor">
+        <div class="contenedor-cards">
+            @if (this.Model != null)
+             {
                 foreach (Librito libro in this.Model)
-                {
-                    <img src="/*libro.Imagen"
-                         class="img-responsive">
-                    <tr>
-                        <td><span>/*libro.ISBN</span></td>
-                        <td><span>/*libro.Titulo</span></td>
-                        <td><span>/*libro.Editorial</span></td>
-                        <td><span>/*libro.Descripcion</span></td>
+                    {
+                    <div class="contenedor-card-item">
+                        <div class="contenedor-card-item-wrapper">
+                            <img src="../Images/@libro.Imagen" alt="" onclick="location.href='@Url.Action("MostrarUno", "Libro",new { Id = @libro.Id_Libro })'">
+                            <div class="contenedor-info">
+                                <div class="info" id="info">
+                                    <p class="titulo" id="titulo">@libro.Titulo</p>
 
-                        /*foreach (Autor a in libro.Autores)
-                        {
-                            <td><span>/*a.Nombre</span></td>
+                                    @foreach (Autor a in libro.Autores)
+                                    {
+                                    <span class="autores" id="autores">@a.Nombre</span>
 
-                        }
-
-                        <td class="text-center">
-                            <div class="text-left">
-                                /*Html.ActionLink(" ", $"Editar", new { Id = libro.Id_Libro }, new
-                           {
-                               /*class = "glyphicon glyphicon-edit",
-                               style = "font-size: 1.Sem"
-                           })
-
-
-                                /*Html.ActionLink(" ", "Eliminar", new { Id = libro.Id_Libro }, new
-                           {
-                               /*class = "glyphicon glyphicon-trash",
-                               style = "font-size: 1.Sem"
-                           })
-                            </div>
-                        </td>
-                    </tr>
-                }
-            }
-        </tbody>
-    </table>-->
-        @if (this.Model != null)
-        {
-            foreach (Librito libro in this.Model)
-            {
-                <div class="contenedor">
-                    <div class="contenedor-cards">
-                        <div class="contenedor-card-item">
-                            <div class="contenedor-card-item-wrapper">
-                                <img src="../Images/@libro.Imagen" alt="" onclick="location.href='@Url.Action("MostrarUno", "Libro",new { Id = @libro.Id_Libro })'">
-                                <div class="contenedor-info">
-                                    <div class="info">
-                                        <p class="titulo">@libro.Titulo</p>
-
-                                        @foreach (Autor a in libro.Autores)
-                                        {
-                                        <span class="autores">@a.Nombre</span>
-
-                                        }
-                                    </div>
-                                    <div class="fondo"></div>
+                                    }
                                 </div>
+                                <div class="fondo"></div>
                             </div>
-                        </div>  
-                    </div>
-                </div>
-            }
+                        </div>
+                    </div>  
+                }
 
-         }
+             }
+        </div>
+    </div>
 
 </main>
 <script src="~/Scripts/ScriptLibros.js"></script>

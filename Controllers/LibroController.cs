@@ -42,7 +42,7 @@ namespace AccentureAccademySchultenAlejandro.Controllers
 
             return View(libritos);
         }
-        
+      
         public ActionResult MostrarOrdenado(string ordenarPor)
         {
             List<Librito> libritos = new List<Librito>();
@@ -86,7 +86,7 @@ namespace AccentureAccademySchultenAlejandro.Controllers
                     libritos = libritos.OrderBy(l => l.Titulo).ToList();
                     break;
             }
-            return View("Mostrar",libritos);
+            return RedirectToAction("Mostrar",libritos);
         }
         public ActionResult MostrarUno(int Id)
         {

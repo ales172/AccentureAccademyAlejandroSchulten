@@ -30,6 +30,33 @@
             </div>
         </div>
     </div>
+    <div style="float:left; top:0; padding:5px">
+        <table>
+            <thead>
+            <th>ISBN</th>
+            <th>Titulo</th>
+            <th>Editorial</th>
+            <th>Genero</th>
+            <th>Descripcion</th>
+            <th>Autor</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td>@this.Model.ISBN</td>
+                <td>@this.Model.Titulo</td>
+                <td>@this.Model.Editorial</td>
+                <td>@this.Model.Genero</td>
+                <td>@this.Model.Descripcion</td>
+                <td>
+                    @foreach (Autor a in this.Model.Autores)
+                    {
+                        @a.Nombre
+                    }
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
     <div>
         @Html.ActionLink("Eliminar", "Crear", "Libro", null, new { @class = "glyphicon glyphicon-trash" })
     </div>

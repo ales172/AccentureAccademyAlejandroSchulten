@@ -6,7 +6,8 @@
 <html>
 <body>
     <div>
-        <th><h2>Generos:</h2></th>
+            <h2>Generos:</h2>
+            <span style="z-index:0">@Html.ActionLink("Nuevo", "Crear", "Genero", null, new { @class = "glyphicon glyphicon-plus" })</span>
         <table>
 
             @foreach (Genero genero in this.Model)
@@ -33,5 +34,6 @@
             }
         </table>
     </div>
+    
 </body>
 </html>

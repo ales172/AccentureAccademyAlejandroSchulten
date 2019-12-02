@@ -4,7 +4,7 @@
 
 .contenedor {
     position: relative;
-    width: 100%;
+    width: 80%;
     margin: 0 auto;
     transition: all 0.3s ease-out;
     margin-top: 50px;
@@ -21,7 +21,7 @@
     .contenedor-cards .contenedor-card-item {
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
-        /*-o-box-sizing: border-box;*/
+        box-sizing: border-box;
         width: 25%;
         margin: 1%;
         -webkit-transition: all 0.3s ease-out;
@@ -42,7 +42,6 @@
 .contenedor-card-item-wrapper {
     overflow: hidden;
     position: relative !important;
-    background: #3E2723;
     border-radius: 5px;
 }
 
