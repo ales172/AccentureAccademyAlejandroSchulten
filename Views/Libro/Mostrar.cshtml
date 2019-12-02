@@ -30,25 +30,30 @@ function myFunction() {
             @Html.ActionLink("Nuevo", "Crear", "Libro", null, new { @class = "btnCrear btn" })
 
             <!--<input type="text" id="buscar" onkeyup="myFunction()" placeholder="Busqueda Central" title="Busqueda Rapida" class="form-control">-->
-
             <!--<tr>
         <input type="text" id="search" placeholder="Busque..." autofocus />
     </tr>-->
-            <form>
-                <div>Ordenar por:</div>
-                <select action="/Libro/MostrarOrdenado/" class="glyphicon glyphicon-refresh">
-                    <option value="Autor">Autor</option>
-                    <option value="Genero">Genero</option>
-                    <option value="Titulo" selected>Titulo</option>
-                    <option value="Editorial">Editorial</option>
-                </select>
+            
 
-                <button class="glyphicon glyphicon-refresh" style="margin-top:1em" onclick="location.href='@Url.Action("MostrarOrdenado", "Libro",new {ordenadopor = "Autor" })'">
-                </button>
-            </form>
-
-
-        </nav>
+            @using (Html.BeginForm())
+            {
+                <table class="table">
+                    <thead>
+                        <tr>Buscar Libro</tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input name="Titulo" type="text" class="form-control" />
+                            </td>
+                            <td class="text-right">
+                                <button class="glyphicon glyphicon-search btnCrear"></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+             }
+            </nav>
    
     <div class="contenedor">
         <div class="contenedor-cards">

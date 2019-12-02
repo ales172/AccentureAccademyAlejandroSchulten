@@ -42,8 +42,73 @@ namespace AccentureAccademySchultenAlejandro.Controllers
 
             return View(libritos);
         }
-      
-        public ActionResult MostrarOrdenado(string ordenarPor)
+        [HttpPost]
+        public ActionResult Mostrar(Filtro filtro)
+        {
+            List<Libro> todos = db.Libro.ToList();
+            List<EscritoPor> escp = db.EscritoPor.ToList();
+            IQueryable<Libro> qryLibro = db.Libro;
+            IQueryable<Autor> qryAutor = db.Autor;
+            IQueryable<Genero> qryGenero = db.Genero;
+            IQueryable<Editorial> qryEditorial= db.Editorial;
+
+            List<Libro> aux = new List<Libro>();
+
+            if (filtro.Titulo != null)
+            {
+                qryLibro = qryLibro.Where(lib => lib.Titulo.Contains(filtro.Titulo));
+                qryAutor = qryAutor.Where(aut => aut.Nombre.Contains(filtro.Titulo));
+                qryGenero = qryGenero.Where(gen => gen.Genero1.Contains(filtro.Titulo));
+                qryEditorial = qryEditorial.Where(ed => ed.Editorial1.Contains(filtro.Titulo));
+
+            foreach (Libro libro in qryLibro)
+            {
+                aux.Add(libro);
+            }
+            foreach (Autor aut in qryAutor)
+            {
+                    List<EscritoPor> escpor = db.EscritoPor.Where(es => es.Id_Autor == aut.Id_Autor).ToList();
+                    foreach (EscritoPor escrito in escpor) {
+                        aux.Add(db.Libro.Where(l => l.Id_Libro == escrito.Id_Libro).FirstOrDefault());
+                    }
+                 
+            }
+            foreach (Genero gen in qryGenero)
+            {
+                    aux.Add(db.Libro.Where(l => l.Id_Genero == gen.Id_Genero).FirstOrDefault());
+                }
+            foreach (Editorial ed in qryEditorial)
+            {
+                aux.Add(db.Libro.Where(l => l.Id_Editorial == ed.Id_Editorial).FirstOrDefault());
+            }
+            }
+
+            List<Librito> libritos = new List<Librito>();
+            List<EscritoPor> listadoex = db.EscritoPor.ToList();
+            foreach (Libro l in aux)
+            {
+                Librito librito = new Librito();
+                librito.Id_Libro = l.Id_Libro;
+                librito.Titulo = l.Titulo;
+                librito.Descripcion = l.Descripcion;
+                librito.Editorial = db.Editorial.Where(e => e.Id_Editorial == l.Id_Editorial).FirstOrDefault().Editorial1;
+                librito.Genero = db.Genero.Where(g => g.Id_Genero == l.Id_Genero).FirstOrDefault().Genero1;
+                librito.Imagen = l.Imagen;
+                librito.ISBN = l.ISBN;
+                foreach (EscritoPor ex in listadoex)
+                {
+                    if (l.Id_Libro == ex.Id_Libro)
+                    {
+                        librito.Autores.Add(db.Autor.Find(ex.Id_Autor));
+                    }
+                }
+                libritos.Add(librito);
+            }
+                return View(libritos);
+        }
+
+    [HttpPost]
+    public ActionResult MostrarOrdenado(string ordenarPor)
         {
             List<Librito> libritos = new List<Librito>();
             List<Libro> libros = db.Libro.OrderBy(l => l.Titulo).ToList();
@@ -88,6 +153,7 @@ namespace AccentureAccademySchultenAlejandro.Controllers
             }
             return RedirectToAction("Mostrar",libritos);
         }
+
         public ActionResult MostrarUno(int Id)
         {
             this.ViewBag.TituloPagina = "Libro";

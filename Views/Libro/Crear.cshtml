@@ -12,18 +12,18 @@
                 <tbody id="tbCreaAutor">
                     <tr>
                         <td><label>ISBN :</label>
-                        <input type="text" name="ISBN" placeholder="Isbn" value="" /></td>
-                        <td><label>Titulo: </label><input type="text" name="Titulo" placeholder="Titulo" value="" /></td>
-                        <td><label>Genero: </label><input type="text" name="Genero" placeholder="Genero" value="" /></td>
+                        <input type="text" name="ISBN" placeholder="Isbn" value="" required/></td>
+                        <td><label>Titulo: </label><input type="text" name="Titulo" placeholder="Titulo" value="" pattern="[A-Za-Z0-9]" required/></td>
+                        <td><label>Genero: </label><input type="text" name="Genero" placeholder="Genero" value="" required/></td>
                     <tr>
-                        <td><label>Editorial: </label><input type="text" name="Editorial" placeholder="Editorial" value="" /></td>
+                        <td><label>Editorial: </label><input type="text" name="Editorial" placeholder="Editorial" value=""required /></td>
                         <td><label>Descripcion: </label><input type="text" class="text-left" name="Descripcion" placeholder="Ingrese descripcion..." /></td>
                         <td><label>Imagen: </label><input type="file" name="Imagen" value="" /></td>
                     </tr>
                     <tr id="0">
                         <td class="Autores">
                             <label>Autor/es: </label>
-                            <input id="Nombre" type="text" name="Autores[0]" placeholder="Nombre autor" value="" />
+                            <input id="Nombre" type="text" name="Autores[0]" placeholder="Nombre autor" value="" required/>
                             <button type="button" id="otroAutor" class="btn btn-primary" /><span class="glyphicon glyphicon-plus"></span>
                         </td>
                     </tr>

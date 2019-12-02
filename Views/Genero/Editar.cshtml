@@ -9,7 +9,7 @@
     <h2>@this.ViewBag.TituloPagina</h2>
     <form method="post">
         <h3>Genero:</h3>
-        <input type="text" name="Genero1" value="@this.Model.Genero1" />
+        <input type="text" name="Genero1" value="@this.Model.Genero1" required/>
         <input type="hidden" name="Id_Genero" value="@this.Model.Id_Genero" />
 
         <button>Enviar Datos</button>

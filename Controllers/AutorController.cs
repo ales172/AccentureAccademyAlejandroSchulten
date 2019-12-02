@@ -36,7 +36,7 @@ namespace AccentureAccademySchultenAlejandro.Controllers
             {
                 return Content("No puedo insertar los datos, faltan datos");
             }
-           
+            autor.Id_Autor = db.Autor.Count();
             db.Autor.Add(autor);
 
             db.SaveChanges();

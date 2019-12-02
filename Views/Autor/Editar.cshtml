@@ -9,7 +9,7 @@
         <form method="post">
             <h2>@this.ViewBag.TituloPagina</h2>
             Nombre Del Autor:
-            <input type="text" name="Nombre" value="@this.Model.Nombre" />
+            <input type="text" name="Nombre" value="@this.Model.Nombre" required />
             <input type="hidden" name="Id_Autor" value="@this.Model.Id_Autor" />
 
             <button>Enviar Datos</button>

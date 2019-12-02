@@ -146,6 +146,7 @@
     <Compile Include="Models\EscritoPor.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Filtro.cs" />
     <Compile Include="Models\Genero.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
