@@ -1,28 +1,41 @@
 ﻿@using AccentureAccademySchultenAlejandro.Models
 @model List<Librito>
-@{
-    Layout = null;
-}
+
 
 <!DOCTYPE html>
 
 <html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Mostrar</title>
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-3.3.1.js"></script>
-    <script src="~/Scripts/jquery.validate.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
-</head>
 <body>
-    <div class="jumbotron">
-        <h1>Los libros Son:</h1>
-    </div>
-
-    <table class="text-right table-condensed table-striped table-hover">
+    <main class="wraper">
+        <nav id="navLibros">
+            @Html.ActionLink("Agregar", "Crear", "Libro", null, new { @class = "btnCrear" })
+            <table>
+                <thead>
+                    Ordenar por:
+                </thead>
+                <tbody>
+                    <!--<tr>
+                    <input type="text" id="search" placeholder="Busque..." autofocus />
+                </tr>-->
+                    <tr>
+                        <form id="Ordenar">
+                            <select>
+                                <option value="Titulo" selected>Titulo</option>
+                                <option value="Autor">Autor</option>
+                                <option value="Editorial">Editorial</option>
+                                <option value="Genero">Genero</option>
+                            </select>
+                            <input type="submit" value="Aceptar">
+                        </form>
+                    </tr>
+                </tbody>
+            </table>
+        </nav>
+        <!--
+    <table id="TablaMuestra" class="text-right table-condensed table-striped table-hover">
         <thead class="text-right">
             <tr>
+                <th>ISBN</th>
                 <th>Titulo</th>
                 <th>Editorial</th>
                 <th>Descripcion</th>
@@ -30,41 +43,76 @@
             </tr>
         </thead>
         <tbody class="text-left">
-            @if (this.Model != null)
-             {
-                    foreach (Librito libro in this.Model)
-                    {
-                <tr>
-                    <td>@libro.Titulo</td>
-                    <td>@libro.Editorial</td>
-                    <td>@libro.Descripcion</td>
+            /*if (this.Model != null)
+            {
+                foreach (Librito libro in this.Model)
+                {
+                    <img src="/*libro.Imagen"
+                         class="img-responsive">
+                    <tr>
+                        <td><span>/*libro.ISBN</span></td>
+                        <td><span>/*libro.Titulo</span></td>
+                        <td><span>/*libro.Editorial</span></td>
+                        <td><span>/*libro.Descripcion</span></td>
 
-                    @foreach (Autor a in libro.Autores)
-                    {
-                        <td>@a.Nombre</td>
+                        /*foreach (Autor a in libro.Autores)
+                        {
+                            <td><span>/*a.Nombre</span></td>
 
-                    }
+                        }
 
-                    <td class="text-center">
-                        <div class="text-left">
-                            @Html.ActionLink(" ", $"Editar", new { Id = libro.Id_Libro }, new
-                       {
-                           @class = "glyphicon glyphicon-edit",
-                           style = "font-size: 1.Sem"
-                       })
+                        <td class="text-center">
+                            <div class="text-left">
+                                /*Html.ActionLink(" ", $"Editar", new { Id = libro.Id_Libro }, new
+                           {
+                               /*class = "glyphicon glyphicon-edit",
+                               style = "font-size: 1.Sem"
+                           })
 
 
-                            @Html.ActionLink(" ", "Eliminar", new { Id = libro.Id_Libro }, new
-                       {
-                           @class = "glyphicon glyphicon-trash",
-                           style = "font-size: 1.Sem"
-                       })
-                        </div>
-                    </td>
-                </tr>
-             }
-        }
-            </tbody>
-        </table>
+                                /*Html.ActionLink(" ", "Eliminar", new { Id = libro.Id_Libro }, new
+                           {
+                               /*class = "glyphicon glyphicon-trash",
+                               style = "font-size: 1.Sem"
+                           })
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>-->
+        @if (this.Model != null)
+        {
+            foreach (Librito libro in this.Model)
+            {
+                <div class="contenedor">
+                    <div class="contenedor-cards">
+                        <div class="contenedor-card-item">
+                            <div class="contenedor-card-item-wrapper">
+                                <img src="../Images/@libro.Imagen" alt="" onclick="location.href='@Url.Action("MostrarUno", "Libro",new { Id = @libro.Id_Libro })'">
+                                <div class="contenedor-info">
+                                    <div class="info">
+                                        <p class="titulo">@libro.Titulo</p>
+
+                                        @foreach (Autor a in libro.Autores)
+                                        {
+                                        <span class="autores">@a.Nombre</span>
+
+                                        }
+                                    </div>
+                                    <div class="fondo"></div>
+                                </div>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+            }
+
+         }
+
+</main>
+<script src="~/Scripts/ScriptLibros.js"></script>
 </body>
+
 </html>

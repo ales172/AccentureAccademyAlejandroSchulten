@@ -3,52 +3,55 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Alejandro Schulten</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <script src="~/Scripts/indexScript.js"></script>
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/Content/cards.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/indexScript.js"></script>
     <script src="~/Scripts/jquery-3.3.1.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
-    <link href="~/Content/style.css" rel="stylesheet" />
-    <link rel="stylesheet" type="MIME" href="searchbar.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
 </head>
 <body>
-    <nav id="navMenu">
-        <a href="perfil.html" class="link" data-archivo="perfil">perfil</a>
-        <a href="portfolio.html" class="link" data-archivo="portfolio">portfolio</a>
-        <a href="contacto.html" class="link" data-archivo="contacto">contacto</a>
-        <script src="~/Scripts/script.js"></script>
-    </nav>
     <header>
-        <button id="btnMenu"><span class="glyphicon glyphicon-menu-hamburger "></button>
-        <h1>Biblioteca</h1>
-        <form action="">
-            <input type="search">
-            <i class="fa fa-search"></i>
-        </form>
+        @Html.ActionLink("Home", "Index", "Home", null, new { @class = "btnHome" })
+        <div id="logo-header"style="top:0px; align-content: center; justify-content: stretch">
+            <img id="logo" src="http://www.movilibro.com.ar/img/logo-movilibro.svg" style="height: 1%; min-height:30px; max-height: 60px"/>
+        </div>
+        <nav id="navMenu">
+            <a href="../Libro/Mostrar" class="link" data-archivo="libros">Libros</a>
+            <a href="../Autor/Mostrar" class="link" data-archivo="autores">Autores</a>
+            <a href="../Genero/Mostrar" class="link" data-archivo="generos">Generos</a>
+            <a href="../Editorial/Mostrar" class="link" data-archivo="editoriales">Editoriales</a>
 
+        </nav>
+        <!--
+    <button id="btnMenu"><span class="glyphicon glyphicon-menu-hamburger "></span></button>-->
+        <!--<form action="">
+        <input type="search">
+        <i class="fa fa-search"></i>
+    </form>-->
     </header>
-    <main>
-        <div class="container body-content ">
-           <hr />
-            @RenderBody()
-            <hr />
-            </div>
-    </main>
-    <footer>
-        <p>&copy; Copyright - 2019</p>
-    </footer>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-</body>
+
+            
+               
+                @RenderBody()
+            
+   
+       
+        <footer>
+            <p>&copy; Copyright - 2019</p>
+        </footer>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </body>
 </html>
 
 

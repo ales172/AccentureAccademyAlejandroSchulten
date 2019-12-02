@@ -1,45 +1,30 @@
 ﻿@using AccentureAccademySchultenAlejandro.Models
 @model Librito
-@{
-    Layout = null;
-    }
 
 <!DOCTYPE html>
 <html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Crear</title>
-    <script src="~/Scripts/jquery-3.3.1.js"></script>
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <script src="~/Scripts/bootstrap.js"></script>
-    <script src="~/Scripts/jquery.validate.js"></script>
-
-</head>
 <body>
-    <header class="jumbotron bg-primary">
-        <h1>Editar</h1>
-    </header>
     <main>
         <form method="post">
             <input type="hidden" name="Id_Libro" value="@this.Model.Id_Libro" />
             <table class="text-left" id="tablaCrea">
                 <tbody id="tbCreaAutor">
                     <tr>
-                        <td><input type="text" name="ISBN" value="@this.Model.ISBN" /></td>
-                        <td><input type="text" name="Titulo" value="@this.Model.Titulo" /></td>
-                        <td><input type="text" name="Genero" value="@this.Model.Genero" /></td>
+                        <td><label>ISBN: </label><input type="text" name="ISBN" value="@this.Model.ISBN" /></td>
+                        <td><label>Titulo: </label><input type="text" name="Titulo" value="@this.Model.Titulo" /></td>
+                        <td><label>Genero: </label><input type="text" name="Genero" value="@this.Model.Genero" /></td>
                     <tr>
-                        <td><input type="text" name="Editorial" value="@this.Model.Editorial" /></td>
-                        <td><input type="text" name="Descripcion" value="@this.Model.Descripcion" /></td>
-                        <td><input type="text" name="Imagen" value="@this.Model.Imagen" /></td>
+                        <td><label>Editorial: </label><input type="text" name="Editorial" value="@this.Model.Editorial" /></td>
+                        <td><label>Descripcion: </label><input type="text" name="Descripcion" value="@this.Model.Descripcion" /></td>
+                        <td><label>Imagen: </label><input type="text" name="Imagen" value="@this.Model.Imagen" /></td>
                     </tr>
                     <tr id="0">
-                      
+
                         @for (int i = 0; i < this.Model.Autores.Count(); i++)
                         {
-                        
+
                             <td class="Autores">
+                                <label>Autor/es: </label>
                                 <input id="Nombre" type="text" name="Autores[@i].Nombre" value="@this.Model.Autores[i].Nombre" />
                                 <input id="Id_Autor" type="hidden" name="Autores[@i].Id_Autor" value="@this.Model.Autores[i].Id_Autor" />
                             </td>
@@ -50,6 +35,7 @@
             </table>
             <button>Submit</button>
         </form>
+        
     </main>
     <script src="~/Scripts/script.js"></script>
 

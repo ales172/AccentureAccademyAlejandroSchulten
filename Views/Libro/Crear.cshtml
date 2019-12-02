@@ -1,42 +1,28 @@
 ﻿@using AccentureAccademySchultenAlejandro.Models
 @model IEnumerable<Autor>
-@{
-    Layout = null;
-}
-
-
-
 
 <!DOCTYPE html>
 <html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Crear</title>
-    <script src="~/Scripts/jquery-3.3.1.js"></script>
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <script src="~/Scripts/bootstrap.js"></script>
-    <script src="~/Scripts/jquery.validate.js"></script>
-</head>
+
 <body>
-    <header class="jumbotron bg-primary">
-        <h1>Crear un Libro</h1>
-    </header>
+   
     <main>
         <form method="post">
             <table class="text-left" id="tablaCrea">
                 <tbody id="tbCreaAutor">
                     <tr>
-                        <td><input type="text" name="ISBN" placeholder="Isbn" value="" /></td>
-                        <td><input type="text" name="Titulo" placeholder="Titulo" value="" /></td>
-                        <td><input type="text" name="Genero" placeholder="Genero" value="" /></td>
+                        <td><label>ISBN :</label>
+                        <input type="text" name="ISBN" placeholder="Isbn" value="" /></td>
+                        <td><label>Titulo: </label><input type="text" name="Titulo" placeholder="Titulo" value="" /></td>
+                        <td><label>Genero: </label><input type="text" name="Genero" placeholder="Genero" value="" /></td>
                     <tr>
-                        <td><input type="text" name="Editorial" placeholder="Editorial" value="" /></td>
-                        <td><input type="text" class="text-left" name="Descripcion" placeholder="Ingrese descripcion..." /></td>
-                        <td><input type="file" name="Imagen" value="" /></td>
+                        <td><label>Editorial: </label><input type="text" name="Editorial" placeholder="Editorial" value="" /></td>
+                        <td><label>Descripcion: </label><input type="text" class="text-left" name="Descripcion" placeholder="Ingrese descripcion..." /></td>
+                        <td><label>Imagen: </label><input type="file" name="Imagen" value="" /></td>
                     </tr>
                     <tr id="0">
                         <td class="Autores">
+                            <label>Autor/es: </label>
                             <input id="Nombre" type="text" name="Autores[0]" placeholder="Nombre autor" value="" />
                             <button type="button" id="otroAutor" class="btn btn-primary" /><span class="glyphicon glyphicon-plus"></span>
                         </td>

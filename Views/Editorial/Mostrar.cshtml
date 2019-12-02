@@ -1,22 +1,10 @@
 ﻿@using AccentureAccademySchultenAlejandro.Models
 @model List<Editorial>
-@{
-    Layout = null;
-}
+
 
 <!DOCTYPE html>
-<link href="~/Content/bootstrap.css" rel="stylesheet" />
-<script src="~/Scripts/jquery-3.3.1.js"></script>
-<script src="~/Scripts/bootstrap.js"></script>
 <html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Mostrar</title>
-</head>
 <body>
-    <header class="jumbotron text-center">
-        <h1>Listado de Editoriales</h1>
-    </header>
     <main>
         <div>
             <th><h2>Editoriales:</h2></th>
@@ -25,7 +13,7 @@
                 @foreach (Editorial editorial in this.Model)
                 {
                     <tr>
-                        <td><h3>@editorial.Editorial1</h3></td>
+                        <td>@editorial.Editorial1</td>
                         <td class="text-center">
                             <div class="text-right">
                                 @Html.ActionLink(" ", $"Editar", new { Id = editorial.Id_Editorial}, new

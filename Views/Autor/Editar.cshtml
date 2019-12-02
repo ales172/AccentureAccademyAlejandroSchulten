@@ -1,29 +1,19 @@
 ﻿@using AccentureAccademySchultenAlejandro.Models
 @model Autor
-@{
-    Layout = null;
-}
 
 
 <!DOCTYPE html>
-
 <html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Crear</title>
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <script src="~/Scripts/bootstrap.js"></script>
-</head>
 <body>
-    <header class="jumbotron text-center">
-        <h1>@this.ViewBag.TituloPagina</h1>
-    </header>
-    <form method="post">
-        Nombre Del Autor:
-        <input type="text" name="Nombre" value="@this.Model.Nombre" />
-        <input type="hidden" name="Id_Autor" value="@this.Model.Id_Autor" />
-       
-        <button>Enviar Datos</button>
-    </form>
+    <main>
+        <form method="post">
+            <h2>@this.ViewBag.TituloPagina</h2>
+            Nombre Del Autor:
+            <input type="text" name="Nombre" value="@this.Model.Nombre" />
+            <input type="hidden" name="Id_Autor" value="@this.Model.Id_Autor" />
+
+            <button>Enviar Datos</button>
+        </form>
+    </main>
 </body>
 </html>

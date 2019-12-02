@@ -42,7 +42,75 @@ namespace AccentureAccademySchultenAlejandro.Controllers
 
             return View(libritos);
         }
+        
+        public ActionResult MostrarOrdenado(string ordenarPor)
+        {
+            List<Librito> libritos = new List<Librito>();
+            List<Libro> libros = db.Libro.OrderBy(l => l.Titulo).ToList();
+            List<EscritoPor> listadoex = db.EscritoPor.ToList();
+            foreach (Libro l in libros)
+            {
+                Librito librito = new Librito();
+                librito.Id_Libro = l.Id_Libro;
+                librito.Titulo = l.Titulo;
+                librito.Descripcion = l.Descripcion;
+                librito.Editorial = db.Editorial.Where(e => e.Id_Editorial == l.Id_Editorial).FirstOrDefault().Editorial1;
+                librito.Genero = db.Genero.Where(g => g.Id_Genero == l.Id_Genero).FirstOrDefault().Genero1;
+                librito.Imagen = l.Imagen;
+                librito.ISBN = l.ISBN;
+                foreach (EscritoPor ex in listadoex)
+                {
+                    if (l.Id_Libro == ex.Id_Libro)
+                    {
+                        librito.Autores.Add(db.Autor.Find(ex.Id_Autor));
+                    }
+                }
+                libritos.Add(librito);
+            }
+           
+            switch (ordenarPor)
+            {
+                case "Titulo":
+                    libritos = libritos.OrderBy(l => l.Titulo).ToList();
+                    break;
+                case "Autor":
+                    libritos = libritos.OrderBy(l => l.Autores.First().Nombre).ToList(); 
+                    break;
+                case "Editorial":
+                    libritos = libritos.OrderBy(l => l.Editorial).ToList();
+                    break;
+                case "Genero":
+                    libritos = libritos.OrderBy(l => l.Genero).ToList();
+                    break;
+                default:
+                    libritos = libritos.OrderBy(l => l.Titulo).ToList();
+                    break;
+            }
+            return View("Mostrar",libritos);
+        }
+        public ActionResult MostrarUno(int Id)
+        {
+            this.ViewBag.TituloPagina = "Libro";
+            Librito libro = new Librito();
+            Libro l = db.Libro.Find(Id);
+            libro.Id_Libro = l.Id_Libro;
+            libro.Titulo = l.Titulo;
+            libro.Descripcion = l.Descripcion;
+            libro.Editorial = db.Editorial.Where(e => e.Id_Editorial == l.Id_Editorial).FirstOrDefault().Editorial1;
+            libro.Genero = db.Genero.Where(g => g.Id_Genero == l.Id_Genero).FirstOrDefault().Genero1;
+            libro.Imagen = l.Imagen;
+            libro.ISBN = l.ISBN;
+            List<EscritoPor> listadoex = db.EscritoPor.ToList();
+            foreach (EscritoPor ex in listadoex)
+            {
+                if (l.Id_Libro == ex.Id_Libro)
+                {
+                    libro.Autores.Add(db.Autor.Find(ex.Id_Autor));
+                }
+            }
 
+            return View(libro);
+        }
         public ActionResult Crear()
         {
             this.ViewBag.TituloPagina = "Agregar Libro";

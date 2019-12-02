@@ -15,6 +15,7 @@ function agregaAutor() {
 
 
 
+
 let btnOtroAutor = document.querySelector("#otroAutor");
 btnOtroAutor.addEventListener("click", e => {
     e.preventDefault();
@@ -24,9 +25,9 @@ btnOtroAutor.addEventListener("click", e => {
 
 let main = document.querySelector("main");
 
-let btnMenu = document.querySelector("#btnMenu");
-let nav = document.querySelector("#navMenu");
-btnMenu.addEventListener("click", () => nav.classList.toggle("abierto"))
+// btnMenu = document.querySelector("#btnMenu");
+//let nav = document.querySelector("#navMenu");
+//btnMenu.addEventListener("click", () => nav.classList.toggle("abierto"))
 
 function direccion(url) {
     let xhr = new XMLHttpRequest;

@@ -1,0 +1,37 @@
+﻿@using AccentureAccademySchultenAlejandro.Models
+@model Librito
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>MostrarUno</title>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="contenedor-cards">
+            <div class="contenedor-card-item">
+                <div class="contenedor-card-item-wrapper">
+                    <img src="/Images/@this.Model.Imagen" alt="" onclick="location.href='@Url.Action("Editar", "Libro",new { Id = this.Model.Id_Libro })'">
+                    <div class="contenedor-info">
+                        <div class="info">
+                            <p class="titulo">@this.Model.Titulo</p>
+
+                            @foreach (Autor a in this.Model.Autores)
+                            {
+                                <span class="autores">@a.Nombre</span>
+
+                            }
+                        </div>
+                        <div class="fondo"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        @Html.ActionLink("Eliminar", "Crear", "Libro", null, new { @class = "glyphicon glyphicon-trash" })
+    </div>
+</body>
+</html>
